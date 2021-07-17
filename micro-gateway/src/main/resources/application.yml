@@ -1,0 +1,39 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: micro-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 193.168.1.201:8848
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+      routes:
+        - id: usercenter
+          uri: lb://micro-usercenter
+          predicates:
+            - Path=/center/**
+          filters:
+            - StripPrefix=1
+        - id: authorization
+          uri: lb://micro-authorization
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+        - id: order-service
+          uri: lb://micro-order-service
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
