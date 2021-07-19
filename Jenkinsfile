@@ -8,7 +8,6 @@ node {
     def list_select_project_names = "${project_name}".split(",")
 
     stage('pull code') {
-        echo "${project_name}"
         checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], extensions: [], userRemoteConfigs: [[credentialsId: 'd6de8504-48c7-402b-b727-4a42202a681d', url: 'git@192.168.8.151:root/micro-service-template.git']]])
     }
 
@@ -20,6 +19,11 @@ node {
             def project_port = infos[1]
             echo "${project_port}"
         }
+    }
+
+    stage('install common environment') {
+        sh "mvn -f micro-common clean install"
+        sh "mvn -f micro-feign-api clean install"
     }
 
 }
