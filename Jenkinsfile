@@ -22,6 +22,7 @@ node {
     }
 
     stage('install common environment') {
+        sh "mvn -f micro-dependencies clean install"
         sh "mvn -f micro-common clean install"
         sh "mvn -f micro-feign-api clean install"
     }
