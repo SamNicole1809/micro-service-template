@@ -9,7 +9,6 @@ node {
 
     stage('pull code') {
         echo "${project_name}"
-        echo list_select_project_names
         checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], extensions: [], userRemoteConfigs: [[credentialsId: 'd6de8504-48c7-402b-b727-4a42202a681d', url: 'git@192.168.8.151:root/micro-service-template.git']]])
     }
 
