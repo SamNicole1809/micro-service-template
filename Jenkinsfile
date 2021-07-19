@@ -15,11 +15,10 @@ node {
 
     stage('check code') {
         for(int i = 0; i < list_select_project_names.length; i++) {
-            echo list_select_project_names[i]
-            def infos = list_select_project_names[i].split("@")
-            echo infos
-            def project_name = infos[0]
-            def project_port = infos[1]
+            echo "${list_select_project_names}"[i]
+            def infos = "${list_select_project_names}"[i].split("@")
+            def project_name = "${infos}"[0]
+            def project_port = "${infos}"[1]
             echo "${project_name}" - "${project_port}"
         }
     }
