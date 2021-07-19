@@ -11,6 +11,10 @@ node {
         checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], extensions: [], userRemoteConfigs: [[credentialsId: 'd6de8504-48c7-402b-b727-4a42202a681d', url: 'git@192.168.8.151:root/micro-service-template.git']]])
     }
 
+    stage('first install') {
+        sh "mvn install"
+    }
+
     stage('check code') {
         for(int i = 0; i < list_select_project_names.length; i++) {
             def infos = list_select_project_names[i].split("@")
