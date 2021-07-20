@@ -53,11 +53,11 @@ node {
             def project_port = infos[1]
             def image_name = "${project_name}:${tag}"
             def tag_name = "${harbor_url}/${harbor_project_name}/${image_name}"
-            echo "harbor_url ->" harbor_url
-            echo "harbor_project_name ->" harbor_project_name
-            echo "project_name ->" project_name
-            echo "project_port ->" project_port
-            echo "tag ->" tag
+            echo "harbor_url -> ${harbor_url}"
+            echo "harbor_project_name -> ${harbor_project_name}" 
+            echo "project_name -> ${project_name}"
+            echo "project_port -> ${project_port}"
+            echo "tag -> ${tag}"
             sshPublisher(publishers: [sshPublisherDesc(configName: 'server-1', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '/opt/jenkin_shell/deploy.sh ${harbor_url} ${harbor_project_name} ${project_name} ${project_port} ${tag}', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             sshPublisher(publishers: [sshPublisherDesc(configName: 'server-2', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '/opt/jenkin_shell/deploy.sh ${harbor_url} ${harbor_project_name} ${project_name} ${project_port} ${tag}', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
         }
