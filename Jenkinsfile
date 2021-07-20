@@ -51,8 +51,6 @@ node {
             def infos = list_select_project_names[i].split("@")
             def project_name = infos[0]
             def project_port = infos[1]
-            def image_name = "${project_name}:${tag}"
-            def tag_name = "${harbor_url}/${harbor_project_name}/${image_name}"
             sshPublisher(publishers: [sshPublisherDesc(configName: 'server-1', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/opt/jenkin_shell/deploy.sh ${harbor_url} ${harbor_project_name} ${project_name} ${project_port} ${tag}", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             sshPublisher(publishers: [sshPublisherDesc(configName: 'server-2', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/opt/jenkin_shell/deploy.sh ${harbor_url} ${harbor_project_name} ${project_name} ${project_port} ${tag}", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
         }
